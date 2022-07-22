@@ -28,4 +28,19 @@ io.on('connection', client => {
         io.emit('mensaje',{admin: 'nuevo mensaje'});
 
      });
+
+     //"Aguien" hara que el servidor escuche este mensaje y asu vez este emitira el mensaje a los clientes 
+     client.on('emitir-mensaje', (payload)=>{
+         //emitira un nuevo-msj que es lo que la app esta escuchando
+         /*
+           io.emit                =>Emite a todos los clientes, incluyendo al mismo que lo emitio
+           client.broadcast.emit  =>Emite a todos los clientes, excluye a quien lo emitio
+          */ 
+         //io.emit('nuevo-msj',payload); 
+
+          //console.log(payload)
+
+         client.broadcast.emit('nuevo-msj',payload); 
+     });
+
   });

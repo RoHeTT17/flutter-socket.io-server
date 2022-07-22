@@ -38,11 +38,14 @@
         //   usualmente se mandan objeto para mandar varias cosas
         socket.emit('mensaje',{nombre: 'El Roger'});
 
-
         //Escuchar el evento 'mensaje' del servidor
         socket.on('mensaje', function(payload){
                 console.log('Escuchando:', payload);
         });   
+
+        socket.on('nuevo-msj', function(payload){
+                console.log('Escuchando:', payload);
+        });  
 
     </script>
 
