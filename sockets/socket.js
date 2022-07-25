@@ -2,7 +2,21 @@
 //importar el io del index.js. 
 //Es un importanción con nombre por eso va entre {}
 const {io} = require('../index');
+const Band = require('../models/band');
+const Bands = require('../models/Bands');
 
+//Cada cambio que se hace  vuelve a ejecutar todo el codigo de este archivo
+//La idea es que este arreglo se mantenga persistente, a menos que se 
+//haga un cambio en el backend.
+const bands = new Bands();
+
+bands.addBand(new Band('Mana') );
+bands.addBand(new Band('Enanitos') );
+bands.addBand(new Band('Heroes') );
+bands.addBand(new Band('Hombres G') );
+bands.addBand(new Band('Scorpions') );
+
+//console.log(bands);
 //Mensajes de Sockets
 
 //El client es un dispositivo que se acaba de conectar al socket server
@@ -11,6 +25,10 @@ io.on('connection', client => {
     //conexión al socket server y esa conexión del navegador web, cae (guarda)
     //en este client
     console.log('Cliente conectado');
+
+    //Emitir el mensaje unicamente al cliente que se esta conectando, manda el 
+    //arreglo de las bands que estan registradas en el servidor
+    client.emit('active-bands',bands.getBands());
 
     //Este es el callbak que se va a disparar cuando este cliente 
     //en particular se desconecte

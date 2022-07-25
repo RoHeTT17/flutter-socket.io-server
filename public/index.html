@@ -40,12 +40,18 @@
 
         //Escuchar el evento 'mensaje' del servidor
         socket.on('mensaje', function(payload){
-                console.log('Escuchando:', payload);
+            console.log('Escuchando:', payload);
         });   
 
         socket.on('nuevo-msj', function(payload){
-                console.log('Escuchando:', payload);
+            console.log('Escuchando:', payload);
         });  
+
+        socket.on('active-bands',function(bands){
+            console.clear();
+            //Como se recibe un arreglo, se puede usar el table, para que lo formatee
+            console.table(bands);
+        });
 
     </script>
 
