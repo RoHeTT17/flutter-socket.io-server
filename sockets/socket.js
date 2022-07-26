@@ -61,4 +61,45 @@ io.on('connection', client => {
          client.broadcast.emit('nuevo-msj',payload); 
      });
 
+     
+     //Escucha el evento (se manda desde flutter)
+     client.on('vote-band', (payload) =>{
+
+        //console.log(payload.id);
+        //incrementar votos    
+        bands.voteBand(payload.id);   
+
+        //avisa a todos los dispositivos conectados que hagan un "refesh" con la información
+        //actualizada del arreglo bands
+        io.emit('active-bands',bands.getBands());
+
+        //console.log(payload); 
+
+     });
+
+     //Escuchando evento add-band
+     client.on('add-band', (payload)=>{
+         //console.log(payload.name);   
+         //Crear el "objeto" pasandole el nombre
+        const newBand = new Band (payload.name);
+
+        bands.addBand(newBand);
+        io.emit('active-bands',bands.getBands());
+    });
+
+    client.on('delete-band', (payload) =>{
+
+        //console.log(payload.id);
+        //incrementar votos    
+        bands.deleteBand(payload.id);   
+
+        //avisa a todos los dispositivos conectados que hagan un "refesh" con la información
+        //actualizada del arreglo bands
+        io.emit('active-bands',bands.getBands());
+
+        //console.log(payload); 
+
+     });
+
+
   });

@@ -11,6 +11,7 @@ class Bands{
 
     addBand(band = new Band()){
 
+        //console.log('addBand: '+band)
         //Agregar una nueva band
         this.bands.push(band); 
 
@@ -31,8 +32,12 @@ class Bands{
         //Si esto estuviera a la base de datos, no se necesitaría este barrido.
         this.bands = this.bands.map(band =>{
 
+            // console.log("bandid "+band.id);   
+            // console.log("id.....");
+            // console.log(id); 
+
             if(band.id == id){
-                band.voteBand++;
+                band.votes++;
                 return band;
             }else{
                 return band;
