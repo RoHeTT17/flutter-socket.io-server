@@ -3,7 +3,7 @@
 //Es un importanción con nombre por eso va entre {}
 const {io} = require('../index');
 const Band = require('../models/band');
-const Bands = require('../models/Bands');
+const Bands = require('../models/bands');
 
 //Cada cambio que se hace  vuelve a ejecutar todo el codigo de este archivo
 //La idea es que este arreglo se mantenga persistente, a menos que se 
